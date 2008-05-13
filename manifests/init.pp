@@ -17,7 +17,7 @@ class motd { }
 
 class motd::client {
     file{"/etc/motd":
-        content => generate("/bin/sh", "-c", "\"/usr/bin/figlet ${hostname}; /bin/echo -e ${motd_message}\""),
+        content => generate("/opt/bin/motd_gen.sh", "${hostname}". "${motd_message}"),
         owner => root, group => 0, mode => 0644;
     } 
 }
@@ -25,5 +25,12 @@ class motd::client {
 class motd::puppetmaster {
     package{figlet:
         ensure => installed,
+        before => File["/etc/motd"],
+    }
+
+    file{"/opt/bin/motd_gen.sh":
+        source => "puppet://$server/motd/motd_gen.sh"
+        require => [ Package[figlet], File["/opt/bin"] ],
+        owner => root, group => 0; mode => 0744;
     }
 }
