@@ -29,7 +29,7 @@ class motd::puppetmaster {
     }
 
     file{"/opt/bin/motd_gen.sh":
-        source => "puppet://$server/motd/motd_gen.sh"
+        source => "puppet://$server/motd/motd_gen.sh",
         require => [ Package[figlet], File["/opt/bin"] ],
         owner => root, group => 0; mode => 0744;
     }
