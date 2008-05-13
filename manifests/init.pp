@@ -17,7 +17,7 @@ class motd { }
 
 class motd::client {
     file{"/etc/motd":
-        content => generate("figlet ${hostname}; echo -e ${motd_message}),
+        content => generate("figlet ${hostname}; echo -e ${motd_message}"),
         owner => root, group => 0, mode => 0644;
     } 
 }
