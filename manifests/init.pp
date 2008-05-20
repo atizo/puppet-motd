@@ -32,6 +32,6 @@ class motd::puppetmaster {
         source => "puppet://$server/motd/motd_gen.sh",
         before => File["/etc/motd"],
         require => [ Package[figlet], File["/opt/bin"] ],
-        owner => root, group => 0, mode => 0744;
+        owner => puppet, group => 0, mode => 0755;
     }
 }
