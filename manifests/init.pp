@@ -11,7 +11,7 @@
 # the Free Software Foundation.
 #
 # include motd::puppetmaster on the 
-# master before you to any motd::client
+# master before you do any motd::client
 # calls. 
 # content and generate functions
 # are evaluated on the master!
