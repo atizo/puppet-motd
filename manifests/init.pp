@@ -19,8 +19,6 @@
 # setting $motd_message to some string
 #
 
-# modules_dir { "motd": }
-
 class motd { }
 
 class motd::client {
