@@ -19,25 +19,9 @@
 # setting $motd_message to some string
 #
 
-class motd { }
-
-class motd::client {
-    file{"/etc/motd":
-        content => generate("/opt/bin/motd_gen.sh", "${hostname}", "${motd_message}"),
+class motd {
+    file{'/etc/motd':
+        content => generate('/usr/local/sbin/motd_gen.sh', $hostname, $motd_message),
         owner => root, group => 0, mode => 0644;
-    } 
-}
-
-class motd::puppetmaster {
-    package{figlet:
-        ensure => installed,
-        before => File["/etc/motd"],
-    }
-
-    file{"/opt/bin/motd_gen.sh":
-        source => "puppet://$server/motd/motd_gen.sh",
-        before => File["/etc/motd"],
-        require => [ Package[figlet], File["/opt/bin"] ],
-        owner => puppet, group => 0, mode => 0755;
     }
 }
