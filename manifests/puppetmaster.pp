@@ -1,5 +1,4 @@
 class motd::puppetmaster {
-  include motd
   package{'figlet':
     ensure => present,
   }
